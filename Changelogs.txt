@@ -1,0 +1,28 @@
+This Fork contains :
+
+1.Block reward reduction (i.e The currect block reward will be divided by 3). Emmission factor is changed to 20.
+
+
+2.Difficulty Target has been changed to 90 sseconds. For faster block transactions.
+
+3.Difficulty Algorithm has beeb changed to LWMA-V2. Thanks to Zawy. Thanks to TRTL devs for their small tweaks.
+
+4.Timestamp attacks are now ineffective. Thanks to Jagerman.
+
+5.Difficulty Algorithm is now more sensitive in 50x attacks. Thanks to fireice.
+
+6.Building TEST is disabled.
+
+This commit contains all the changes in one place. If you want to see the above changes in individual commits, refer https://github.com/samvicky26/worktipscoin1/tree/dev3
+
+
+
+About the Block reward reduction:
+
+At the time of writing this the block reward was 496992.2409 WTIP.The block reward will be calculated using this formula(https://github.com/samvicky26/worktipscoin1/blob/dc8d17bc8356d609e503ffbfaeda2155f6ef1a3f/src/CryptoNoteCore/Currency.cpp#L179).
+That will be baseReward = (Total Supply - Mined Coins)/ 2^(emmision factor).
+After the fork , the reward will be calculated by using 20 as emmision factor && 22 as emmision smoothing factor.A smoothing factor has been added to stop the drastic base reward drop.
+The smoothing factor calculates the final base reward using this formula .
+Final Base reward =((Total Supply - Mined Coins)/ 2^(emmision factor))+((Total Supply - Mined Coins)/ 2^(emmision smoothing factor)).
+
+After doing the math, the base reward will be 155299.4409651349.
