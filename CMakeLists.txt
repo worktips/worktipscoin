@@ -8,7 +8,7 @@ set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are
 set(CMAKE_SKIP_INSTALL_RULES OFF)
 set(CMAKE_SKIP_PACKAGE_ALL_DEPENDENCY ON)
 set(CMAKE_SUPPRESS_REGENERATION ON)
-set(DO_TESTS ON CACHE STRING "Spend time making tests? Defaults to ON")
+set(DO_TESTS OFF CACHE STRING "Spend time making tests? Defaults to ON")
 set(STATIC ON CACHE BOOL "Link libraries statically")
 
 set(ENABLE_AVX OFF CACHE STRING "Enable RocksDB AVX/AVX2 support detection? Defaults to OFF")
