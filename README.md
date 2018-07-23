@@ -1,4 +1,4 @@
-This is the reference code for [Worktips](https://worktips.info) cryptocurrency.
+This is the reference code for [Worktips](https://worktips.info) cryptocurrency. Read the Changlogs.txt for more info about the current fork.
 
 ### Worktips is based on the [TurtleCoin](https://github.com/turtlecoin) v0.5.0 code base.
 

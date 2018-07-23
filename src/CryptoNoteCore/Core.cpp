@@ -200,6 +200,7 @@ Core::Core(const Currency& currency, Logging::ILogger& logger, Checkpoints&& che
   upgradeManager->addMajorBlockVersion(BLOCK_MAJOR_VERSION_2, currency.upgradeHeight(BLOCK_MAJOR_VERSION_2));
   upgradeManager->addMajorBlockVersion(BLOCK_MAJOR_VERSION_3, currency.upgradeHeight(BLOCK_MAJOR_VERSION_3));
   upgradeManager->addMajorBlockVersion(BLOCK_MAJOR_VERSION_4, currency.upgradeHeight(BLOCK_MAJOR_VERSION_4));
+  upgradeManager->addMajorBlockVersion(BLOCK_MAJOR_VERSION_5, currency.upgradeHeight(BLOCK_MAJOR_VERSION_5)); 
 
   transactionPool = std::unique_ptr<ITransactionPoolCleanWrapper>(new TransactionPoolCleanWrapper(
     std::unique_ptr<ITransactionPool>(new TransactionPool(logger)),
@@ -519,12 +520,12 @@ Difficulty Core::getDifficultyForNextBlock() const {
 
   uint8_t nextBlockMajorVersion = getBlockMajorVersionForHeight(topBlockIndex);
 
-  size_t blocksCount = std::min(static_cast<size_t>(topBlockIndex), currency.difficultyBlocksCountByBlockVersion(nextBlockMajorVersion));
+  size_t blocksCount = std::min(static_cast<size_t>(topBlockIndex), currency.difficultyBlocksCountByBlockVersion(nextBlockMajorVersion, topBlockIndex));
 
   auto timestamps = mainChain->getLastTimestamps(blocksCount);
   auto difficulties = mainChain->getLastCumulativeDifficulties(blocksCount);
 
-  return currency.nextDifficulty(nextBlockMajorVersion, topBlockIndex, timestamps, difficulties);
+  return currency.getNextDifficulty(nextBlockMajorVersion, topBlockIndex, timestamps, difficulties);
 }
 
 std::vector<Crypto::Hash> Core::findBlockchainSupplement(const std::vector<Crypto::Hash>& remoteBlockIds,
@@ -1127,6 +1128,56 @@ bool Core::getBlockTemplate(BlockTemplate& b, const AccountPublicAddress& adr, c
 
   b.previousBlockHash = getTopBlockHash();
   b.timestamp = time(nullptr);
+  
+  /* Ok, so if an attacker is fiddling around with timestamps on the network,
+     they can make it so all the valid pools / miners don't produce valid
+     blocks. This is because the timestamp is created as the users current time,
+     however, if the attacker is a large % of the hashrate, they can slowly
+     increase the timestamp into the future, shifting the median timestamp
+     forwards. At some point, this will mean the valid pools will submit a
+     block with their valid timestamps, and it will be rejected for being
+     behind the median timestamp / too far in the past. The simple way to
+     handle this is just to check if our timestamp is going to be invalid, and
+     set it to the median.
+
+     Once the attack ends, the median timestamp will remain how it is, until
+     the time on the clock goes forwards, and we can start submitting valid
+     timestamps again, and then we are back to normal. */
+
+  /* Thanks to jagerman for this patch:
+     https://github.com/loki-project/loki/pull/26 */
+
+  /* How many blocks we look in the past to calculate the median timestamp */
+  uint64_t blockchain_timestamp_check_window;
+
+  if (height >= CryptoNote::parameters::LWMA_2_DIFFICULTY_BLOCK_INDEX)
+  {
+      blockchain_timestamp_check_window = CryptoNote::parameters::BLOCKCHAIN_TIMESTAMP_CHECK_WINDOW_V3;
+  }
+  else
+  {
+      blockchain_timestamp_check_window = CryptoNote::parameters::BLOCKCHAIN_TIMESTAMP_CHECK_WINDOW;
+  }
+
+  /* Skip the first N blocks, we don't have enough blocks to calculate a
+     proper median yet */
+  if (height >= blockchain_timestamp_check_window)
+  {
+      std::vector<uint64_t> timestamps;
+
+      /* For the last N blocks, get their timestamps */
+      for (size_t offset = height - blockchain_timestamp_check_window; offset < height; offset++)
+      {
+          timestamps.push_back(getBlockTimestampByIndex(offset));
+      }
+
+      uint64_t medianTimestamp = Common::medianValue(timestamps);
+
+      if (b.timestamp < medianTimestamp)
+      {
+          b.timestamp = medianTimestamp;
+      }
+  }
 
   size_t medianSize = calculateCumulativeBlocksizeLimit(height) / 2;
 
@@ -1471,7 +1522,7 @@ std::error_code Core::validateBlock(const CachedBlock& cachedBlock, IBlockchainC
     }
   }
 
-  if (block.timestamp > getAdjustedTime() + currency.blockFutureTimeLimit()) {
+  if (block.timestamp > getAdjustedTime() + currency.blockFutureTimeLimit(previousBlockIndex+1)) {
     return error::BlockValidationError::TIMESTAMP_TOO_FAR_IN_FUTURE;
   }
 
