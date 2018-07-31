@@ -10,7 +10,7 @@ This is the reference code for [Worktips](https://worktips.info) cryptocurrency.
 * Official Twitter: [Worktips Twitter](https://twitter.com/wtipscoin)
 * Official Telegram: [Worktips Telegram](https://t.me/joinchat/HOvygRE-6UnWOzoh72NVMA)
 * Official Whitepaper: [Worktips Whitepaper](http://worktips.info/whitepaper_worktips.zip)
-* Official Block explorer: [Worktips Block explorer](http://blockexplorer.worktips.info)
+* Official Block explorer: [Worktips Block explorer](http://worktips-explorer.online)
 
 
 ## Worktips Cryptocurrency
@@ -21,9 +21,10 @@ Worktips is an ASIC resistant cryptocurrency designed for mining and perfect for
 - Max. supply: 184,467,440,735.0
 - CryptoNote name: worktips
 - Decimal points: 8
-- Block time: 120
+- Block time: 90
 - Ticker: WTIP
-- Emission speed factor: 18
+- Emission speed factor: 20
+- LWMA-2 difficulty algo
 - P2P port: 17239
 - RPC port: 18238
 
