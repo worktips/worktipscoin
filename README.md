@@ -1,19 +1,20 @@
-This is the reference code for [Worktips](https://worktips.info) cryptocurrency. Read the Changlogs.txt for more info about the current fork.
+This is the reference code for [Worktips](https://worktips.info) cryptocurrency. Read the Changelogs.txt for more info about the current fork.
 
 ### Worktips is based on the [TurtleCoin](https://github.com/turtlecoin) v0.5.0 code base.
 
-* Official homepage: [Worktips](http://worktips.info)
-* Official repository: [Worktips GitHub](https://github.com/worktips/worktipscoin)
-* Official Announcement thread: [Worktips BitcoinTalk](https://bitcointalk.org/index.php?topic=3086019.0)
-* Official Discord: [Worktips Discord](https://discord.gg/UmZExyz)
-* Official Facebook: [Worktips Facebook](https://www.facebook.com/worktipscoin)
-* Official Twitter: [Worktips Twitter](https://twitter.com/wtipscoin)
-* Official Telegram: [Worktips Telegram](https://t.me/joinchat/HOvygRE-6UnWOzoh72NVMA)
-* Official Whitepaper: [Worktips Whitepaper](http://worktips.info/whitepaper_worktips.zip)
-* Official Block explorer: [Worktips Block explorer](http://worktips-explorer.online)
+* Homepage: [Worktips](http://worktips.info)
+* Source code repository: [Worktips GitHub](https://github.com/worktips/worktipscoin)
+* Announcement thread: [Worktips BitcoinTalk](https://bitcointalk.org/index.php?topic=3086019.0)
+* Discord: [Worktips Discord](https://discord.gg/UmZExyz)
+* Facebook: [Worktips Facebook](https://www.facebook.com/worktipscoin)
+* Twitter: [Worktips Twitter](https://twitter.com/wtipscoin)
+* Telegram: [Worktips Telegram](https://t.me/joinchat/HOvygRE-6UnWOzoh72NVMA)
+* Reddit: [Worktips Reddit](https://www.reddit.com/r/worktipscoin)
+* Whitepaper: [Worktips Whitepaper](http://worktips.info/whitepaper_worktips.zip)
+* Block explorer: [Worktips Block explorer](http://worktips-explorer.online)
 
 
-## Worktips Cryptocurrency
+## Worktips
 
 Worktips is an ASIC resistant cryptocurrency designed for mining and perfect for rewarding your workers, co-workers, and colleagues
 
