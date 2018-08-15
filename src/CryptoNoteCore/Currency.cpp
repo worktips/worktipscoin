@@ -497,7 +497,7 @@ T clamp(const T& n, const T& lower, const T& upper) {
 // https://github.com/zawy12/difficulty-algorithms/issues/3
 Difficulty Currency::nextDifficultyV4(std::vector<std::uint64_t> timestamps, std::vector<Difficulty> cumulativeDifficulties) const
 {
-    int64_t T = CryptoNote::parameters::DIFFICULTY_TARGET;
+    int64_t T = CryptoNote::parameters::DIFFICULTY_TARGET_V2;
     int64_t N = CryptoNote::parameters::DIFFICULTY_WINDOW_V3;
     int64_t FTL = CryptoNote::parameters::CRYPTONOTE_BLOCK_FUTURE_TIME_LIMIT_V4;
     int64_t L(0), ST, sum_3_ST(0), next_D, prev_D;
