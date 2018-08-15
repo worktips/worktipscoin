@@ -52,7 +52,6 @@ public:
       {  
           return CryptoNote::parameters::CRYPTONOTE_BLOCK_FUTURE_TIME_LIMIT_V3;  
       } 
- 
       else  
       {  
           return m_blockFutureTimeLimit;  
