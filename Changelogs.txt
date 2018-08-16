@@ -1,8 +1,7 @@
 Changelog for v1.0.3.1
 
 1. Further enhancing the LWMA-2 difficulty algorithm. Thanks to Rocksteady and the Turtlecoin devs.
-2. Removed poolwallet as it was confusing.
-3. Added exporting of private keys to GUI lite wallet in simplewallet format (cross compatible with simplewallet). Thanks Iridium devs.
+2. Added exporting of private keys to GUI lite wallet in simplewallet format (cross compatible with simplewallet). Thanks Iridium devs.
 
 
 Changelog for v1.0.3
