@@ -65,8 +65,8 @@ if(MSVC)
   set(SIMPLE_WALLET_SOURCES_OS
     BinaryInfo/simplewallet.rc
   )
-  set(POOLWALLET_SOURCES_OS
-    BinaryInfo/poolwallet.rc
+  set(POOLWALLET_SOURCES_OS 
+    BinaryInfo/poolwallet.rc  
   )
   set(MINER_SOURCES_OS
     BinaryInfo/miner.rc
@@ -115,7 +115,6 @@ add_dependencies(Rpc version)
 add_dependencies(Daemon version)
 add_dependencies(SimpleWallet version)
 add_dependencies(PaymentGateService version)
-add_dependencies(PoolWallet version)
 add_dependencies(P2P version)
 
 # Finally build the binaries

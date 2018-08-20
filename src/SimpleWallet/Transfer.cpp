@@ -650,7 +650,7 @@ Maybe<uint64_t> getFee()
         std::cout << std::endl 
                   << InformationMsg("What fee do you want to use?")
                   << std::endl
-                  << "Hit enter for the default fee of 0.1 WTIP: ";
+                  << "Hit enter for the default fee of 0.001 WTIP: ";
 
         std::getline(std::cin, stringAmount);
 
@@ -763,14 +763,14 @@ bool parseFee(std::string feeString)
         std::cout << WarningMsg("Failed to parse fee! Ensure you entered the "
                                 "value correctly.")
                   << std::endl
-                  << "Please note, you can only use 2 decimal places."
+                  << "Please note, you can only use 8 decimal places."
                   << std::endl;
 
         return false;
     }
     else if (fee < CryptoNote::parameters::MINIMUM_FEE)
     {
-        std::cout << WarningMsg("Fee must be at least 0.1 WTIP!") << std::endl;
+        std::cout << WarningMsg("Fee must be at least 0.001 WTIP!") << std::endl;
         return false;
     }
 

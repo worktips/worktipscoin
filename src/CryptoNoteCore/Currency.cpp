@@ -139,13 +139,13 @@ size_t Currency::difficultyCutByBlockVersion(uint8_t blockMajorVersion) const {
 }
 
 size_t Currency::difficultyBlocksCountByBlockVersion(uint8_t blockMajorVersion, uint32_t height) const 
-	{  
-	if (height >= CryptoNote::parameters::LWMA_2_DIFFICULTY_BLOCK_INDEX) 
-	{ 
-	return CryptoNote::parameters::DIFFICULTY_BLOCKS_COUNT_V3; 	
-	} 
-	
-	return difficultyWindowByBlockVersion(blockMajorVersion) + difficultyLagByBlockVersion(blockMajorVersion); 
+  {  
+  if (height >= CryptoNote::parameters::LWMA_2_DIFFICULTY_BLOCK_INDEX) 
+  { 
+  return CryptoNote::parameters::DIFFICULTY_BLOCKS_COUNT_V3;  
+  } 
+  
+  return difficultyWindowByBlockVersion(blockMajorVersion) + difficultyLagByBlockVersion(blockMajorVersion); 
 }
 
 size_t Currency::blockGrantedFullRewardZoneByBlockVersion(uint8_t blockMajorVersion) const {
@@ -178,9 +178,9 @@ bool Currency::getBlockReward(uint8_t blockMajorVersion, size_t medianSize, size
 
   uint64_t baseReward = (m_moneySupply - alreadyGeneratedCoins) >> getEmissionSpeedFactorByBlockMajorVersion(blockMajorVersion);
   // Add smoothing component 
-	if (blockMajorVersion >= BLOCK_MAJOR_VERSION_5) {  
-	baseReward += (m_moneySupply - alreadyGeneratedCoins) >> getEmissionSmoothingFactorByBlockMajorVersion(blockMajorVersion); 
-	}
+  if (blockMajorVersion >= BLOCK_MAJOR_VERSION_5) {  
+  baseReward += (m_moneySupply - alreadyGeneratedCoins) >> getEmissionSmoothingFactorByBlockMajorVersion(blockMajorVersion); 
+  }
 
   size_t blockGrantedFullRewardZone = blockGrantedFullRewardZoneByBlockVersion(blockMajorVersion);
   medianSize = std::max(medianSize, blockGrantedFullRewardZone);
@@ -444,11 +444,8 @@ Difficulty Currency::getNextDifficulty(uint8_t version, uint32_t blockIndex, std
 }
 
 // LWMA-2 difficulty algorithm 
-
 // Copyright (c) 2017-2018 Zawy, MIT License
-
 // https://github.com/zawy12/difficulty-algorithms/issues/3
-
 Difficulty Currency::nextDifficultyV3(std::vector<std::uint64_t> timestamps, std::vector<Difficulty> cumulativeDifficulties) const
 
 {
@@ -477,9 +474,56 @@ Difficulty Currency::nextDifficultyV3(std::vector<std::uint64_t> timestamps, std
 
     next_D = (static_cast<int64_t>(cumulativeDifficulties[N] - cumulativeDifficulties[0]) * T * (N+1) * 99) / (100 * 2 * L);  
     prev_D = cumulativeDifficulties[N] - cumulativeDifficulties[N-1];
-	
-	/* Make sure we don't divide by zero if 50x attacker (thanks fireice) */
-	next_D = std::max((prev_D*67)/100, std::min(next_D, (prev_D*150)/100));  
+  
+  /* Make sure we don't divide by zero if 50x attacker (thanks fireice) */
+  next_D = std::max((prev_D*67)/100, std::min(next_D, (prev_D*150)/100));  
+
+    if (sum_3_ST < (8 * T) / 10)
+    {  
+        next_D = std::max(next_D, (prev_D * 110) / 100);
+    }
+
+    return static_cast<uint64_t>(next_D);
+}
+
+template <typename T>
+T clamp(const T& n, const T& lower, const T& upper) {
+  return std::max(lower, std::min(n, upper));
+}
+
+
+// LWMA-2 difficulty algorithm 
+// Copyright (c) 2017-2018 Zawy, MIT License
+// https://github.com/zawy12/difficulty-algorithms/issues/3
+Difficulty Currency::nextDifficultyV4(std::vector<std::uint64_t> timestamps, std::vector<Difficulty> cumulativeDifficulties) const
+{
+    int64_t T = CryptoNote::parameters::DIFFICULTY_TARGET_V2;
+    int64_t N = CryptoNote::parameters::DIFFICULTY_WINDOW_V3;
+    int64_t FTL = CryptoNote::parameters::CRYPTONOTE_BLOCK_FUTURE_TIME_LIMIT_V4;
+    int64_t L(0), ST, sum_3_ST(0), next_D, prev_D;
+
+    if (timestamps.size() <= static_cast<uint64_t>(N))
+    {
+        return 1000;
+    }
+
+    for (int64_t i = 1; i <= N; i++)
+    {  
+        ST = clamp(-6 * T, static_cast<int64_t>(timestamps[i]) - static_cast<int64_t>(timestamps[i-1]), 6 * T);
+
+        L +=  ST * i; 
+
+        if (i > N-3)
+        {
+            sum_3_ST += ST;
+        } 
+    }
+
+    next_D = (static_cast<int64_t>(cumulativeDifficulties[N] - cumulativeDifficulties[0]) * T * (N+1) * 99) / (100 * 2 * L);
+    prev_D = cumulativeDifficulties[N] - cumulativeDifficulties[N-1];
+
+    /* Make sure we don't divide by zero if 50x attacker (thanks fireice) */
+    next_D = std::max((prev_D*67)/100, std::min(next_D, (prev_D*150)/100));
 
     if (sum_3_ST < (8 * T) / 10)
     {  
