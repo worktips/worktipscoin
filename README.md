@@ -16,7 +16,7 @@ This is the reference code for [Worktips](https://worktips.info) cryptocurrency.
 
 ## Worktips
 
-Worktips is an ASIC resistant cryptocurrency designed for mining and perfect for rewarding your workers, co-workers, and colleagues
+Worktips is an ASIC resistant cryptocurrency designed for mining and perfect for rewarding
 
 - Algorithm: CryptoNightLite V1
 - Max. supply: 184,467,440,735.0
