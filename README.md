@@ -246,5 +246,129 @@ MSBuild Worktips.sln /p:Configuration=Release /m
 _Your binaries  will be located in `..\build\src\Release` folder._
 
 
+### Compile on macOS High Sierra
+
+**1. Install dependencies**
+
+- Download and install Xcode from App Store
+
+- Open Xcode and download additional contents
+
+- Download CMAKE for OSX: https://cmake.org/files/v3.10/cmake-3.10.3-Darwin-x86_64.dmg
+
+- Copy the CMAKE app to Application folder as usual
+
+- Open CMAKE GUI once, and close it afterwards
+
+- Run this command in terminal for CMD tools:
+
+on newer devices:
+
+``
+sudo "/Applications/CMake.app/Contents/bin/cmake-gui" --install
+``
+
+on devices older than 4 years:
+
+``
+sudo "/Applications/CMake.app/Contents/bin/cmake-gui" --install=/path/to/bin
+``
+
+- run the following commands:
+
+``
+cd
+``
+
+``
+chmod u+x macOS.sh
+``
+
+``
+./macOS.sh
+``
+
+- install Homebrew
+
+``
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+``
+
+- install xCode CMD tools and install Xcode from app store
+
+``
+xcode-select --install
+``
+
+- accept Xcode license
+
+``
+sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+``
+
+``
+sudo xcodebuild -license accept
+``
+
+- install rocksdb
+
+``
+brew install rocksdb
+``
+
+- install boost
+
+``
+brew install boost
+``
+
+**2. Build/compile**
+
+
+- get the source
+
+``
+git clone https://github.com/worktips/worktipscoin.git worktips
+``
+
+- navigate to:
+
+``
+cd worktips/external/rocksdb/build_tools
+``
+
+- execute the following commands:
+
+``
+chmod +x build_detect_platform
+``
+
+``
+chmod +x version.sh
+``
+
+- navigate back to repo folder:
+
+``
+cd & cd worktips
+``
+
+- prepare the build
+
+``
+mkdir build && cd $
+``
+
+``
+sudo cmake -DBOOST_ROOT=/usr/local/include/boost ..
+``
+
+- build
+
+``
+sudo make
+``
+
+
 ### Credits
 Cryptonote Developers, Bytecoin Developers, Monero Developers, Forknote Project, TurtleCoin Developers
