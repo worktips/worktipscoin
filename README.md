@@ -64,11 +64,7 @@ cd worktips/external/rocksdb/build_tools
 - execute the following commands:
 
 ``
-chmod +x build_detect_platform
-``
-
-``
-chmod +x version.sh
+chmod +x build_detect_platform version.sh
 ``
 
 **4. Build executables**
