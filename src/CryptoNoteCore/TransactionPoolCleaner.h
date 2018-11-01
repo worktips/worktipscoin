@@ -28,6 +28,7 @@
 #include "ITransactionPool.h"
 #include "Logging/ILogger.h"
 #include "Logging/LoggerRef.h"
+#include "../CryptoNoteConfig.h" 
 
 #include <System/ContextGroup.h>
 

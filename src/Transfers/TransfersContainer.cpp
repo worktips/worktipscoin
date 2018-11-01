@@ -154,6 +154,7 @@ TransfersContainer::TransfersContainer(const Currency& currency, Logging::ILogge
   m_currency(currency),
   m_logger(logger, "TransfersContainer"),
   m_transactionSpendableAge(transactionSpendableAge) {
+	  
 }
 
 bool TransfersContainer::addTransaction(const TransactionBlockInfo& block, const ITransactionReader& tx,
@@ -192,8 +193,8 @@ bool TransfersContainer::addTransaction(const TransactionBlockInfo& block, const
         ", transaction hash " << tx.getTransactionHash();
       deleteTransactionTransfers(tx.getTransactionHash());
     }
-
-    throw;
+	
+	throw;
   }
 }
 
@@ -273,7 +274,7 @@ bool TransfersContainer::addTransactionOutputs(const TransactionBlockInfo& block
             duplicate = true;
           }
         }
-
+		
         if (duplicate) {
           auto message = "Failed to add transaction output: key output already exists";
           m_logger(ERROR, BRIGHT_RED) << message << ", transaction hash " << info.transactionHash << ", output index " << info.outputInTransaction <<

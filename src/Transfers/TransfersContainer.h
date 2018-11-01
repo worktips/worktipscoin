@@ -172,7 +172,7 @@ public:
   // IStreamSerializable
   virtual void save(std::ostream& os) override;
   virtual void load(std::istream& in) override;
-
+  
 private:
   struct ContainingTransactionIndex { };
   struct SpendingTransactionIndex { };
