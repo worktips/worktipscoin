@@ -147,8 +147,7 @@ const char* const SEED_NODES[] = {
 	"45.32.42.166:17239", // Tokyo
 	"45.32.171.185:17239", // Miami
 	"108.61.86.119:17239", // New Jersey
-	"45.63.53.126:17239", // Los Angeles
-	"95.179.163.24:17239" // Frankfurt
+	"45.63.53.126:17239" // Los Angeles
 };
 
 } // CryptoNote
