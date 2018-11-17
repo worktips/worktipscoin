@@ -95,7 +95,7 @@ const uint32_t UPGRADE_HEIGHT_V3                             = 27500;
 const uint32_t UPGRADE_HEIGHT_V4                             = 28000; // Upgrade height for CN-Lite Variant 1 switch.
 const uint32_t UPGRADE_HEIGHT_V5                             = 96000;
 
-const uint32_t UPGRADE_DIFFICULTY_HEIGHT_LWMA_V3             = 16500;
+const uint32_t UPGRADE_DIFFICULTY_HEIGHT_LWMA_V3             = 185000;
 const uint64_t DIFFICULTY_WINDOW_V4                          = 60;
 const size_t   BLOCKCHAIN_TIMESTAMP_CHECK_WINDOW_V4          = 11; 
 const uint64_t DIFFICULTY_BLOCKS_COUNT_LWMA_V3               = DIFFICULTY_WINDOW_V4 + 1;
