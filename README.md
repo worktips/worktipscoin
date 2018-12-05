@@ -6,7 +6,6 @@ This is the reference code for [Worktips](https://worktips.info) cryptocurrency.
 * Source code repository: [Worktips GitHub](https://github.com/worktips/worktipscoin)
 * Announcement thread: [Worktips BitcoinTalk](https://bitcointalk.org/index.php?topic=3086019.0)
 * Discord: [Worktips Discord](https://discord.gg/UmZExyz)
-* Facebook: [Worktips Facebook](https://www.facebook.com/worktipscoin)
 * Twitter: [Worktips Twitter](https://twitter.com/wtipscoin)
 * Telegram: [Worktips Telegram](https://t.me/joinchat/HOvygRE-6UnWOzoh72NVMA)
 * Reddit: [Worktips Reddit](https://www.reddit.com/r/worktipscoin)
