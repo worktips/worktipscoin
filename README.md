@@ -1,3 +1,26 @@
+# <b>IMPORTANT ANNOUNCEMENT</b>
+
+<b>Official development moved to https://github.com/worktips-project.
+This repository won't be updated any more.</b>
+
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
 This is the reference code for [Worktips](https://worktips.info) cryptocurrency. Read the Changelogs.txt for more info about the current fork.
 
 ### Worktips is based on the [TurtleCoin](https://github.com/turtlecoin) v0.5.0 code base.
