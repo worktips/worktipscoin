@@ -255,7 +255,7 @@ std::shared_ptr<WalletInfo> createViewWallet(CryptoNote::WalletGreen &wallet)
         std::getline(std::cin, address);
         boost::algorithm::trim(address);
 
-        if (address.length() != 99)
+        if (address.length() >= 98)
         {
             std::cout << WarningMsg("Address is wrong length!") << std::endl
                       << "It should be 99 characters long, but it is "
