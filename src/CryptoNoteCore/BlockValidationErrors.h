@@ -35,6 +35,7 @@ enum class BlockValidationError {
   BLOCK_REWARD_MISMATCH,
   CHECKPOINT_BLOCK_HASH_MISMATCH,
   PROOF_OF_WORK_TOO_WEAK,
+  NO_MORE_BLOCK,
   TRANSACTION_ABSENT_IN_POOL
 };
 
@@ -66,6 +67,7 @@ public:
       case BlockValidationError::BLOCK_REWARD_MISMATCH: return "Block reward doesn't match expected reward";
       case BlockValidationError::CHECKPOINT_BLOCK_HASH_MISMATCH: return "Checkpoint block hash mismatch";
       case BlockValidationError::PROOF_OF_WORK_TOO_WEAK: return "Proof of work is too weak";
+	  case BlockValidationError::NO_MORE_BLOCK: return "Kill block reached";
       case BlockValidationError::TRANSACTION_ABSENT_IN_POOL: return "Block's transaction is absent in transaction pool";
       default: return "Unknown error";
     }

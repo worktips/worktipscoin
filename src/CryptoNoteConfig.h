@@ -41,6 +41,7 @@ const uint64_t LWMA_2_DIFFICULTY_BLOCK_INDEX_V2              = 116000;
 const uint64_t DIFFICULTY_WINDOW_V3                          = 60; 
 const uint64_t DIFFICULTY_BLOCKS_COUNT_V3                    = DIFFICULTY_WINDOW_V3 + 1; 
 
+const uint32_t KILL_HEIGHT									 = 273470;
 const unsigned EMISSION_SPEED_FACTOR                         = 18;
 const unsigned EMISSION_SPEED_FACTOR_V2                      = 20;
 const unsigned EMISSION_SMOOTHING_FACTOR_V2                  = 22;

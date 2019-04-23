@@ -593,6 +593,11 @@ std::error_code Core::addBlock(const CachedBlock& cachedBlock, RawBlock&& rawBlo
     logger(Logging::DEBUGGING) << "Failed to validate block " << blockStr << ": " << blockValidationResult.message();
     return blockValidationResult;
   }
+  
+  if (currency.killHeight() != 0 && cache->getBlockIndex(cachedBlock.getBlockHash()) > currency.killHeight()) {
+	  logger(Logging::ERROR, Logging::BRIGHT_RED) << "Cannot add more blocks. Block " << currency.killHeight() << " is the kill block ";
+	  return error::BlockValidationError::NO_MORE_BLOCK;
+	  }
 
   auto currentDifficulty = cache->getDifficultyForNextBlock(previousBlockIndex);
   if (currentDifficulty == 0) {
